@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.NoticeMapper">
+
+    <sql id="Base_Column_List">
+        id, title, content, create_time, update_time, create_by, update_by, status
+    </sql>
+
+    <!-- 分页查询 -->
+    <select id="selectList" resultType="com.example.entity.Notice">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM notice
+        <where>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" resultType="com.example.entity.Notice">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM notice
+        WHERE id = #{id}
+    </select>
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.example.entity.Notice" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO notice (
+            title, content, create_time, update_time, create_by, update_by, status
+        )
+        VALUES (
+            #{title}, #{content}, #{createTime}, #{updateTime}, #{createBy}, #{updateBy}, #{status}
+        )
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="com.example.entity.Notice">
+        UPDATE notice
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteById">
+        DELETE FROM notice WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatch">
+        DELETE FROM notice WHERE id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 导出所有 -->
+    <select id="selectAllForExport" resultType="com.example.entity.Notice">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM notice
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="getTotalCount" resultType="int">
+        select count(*) from notice
+    </select>
+
+    <select id="getLastWeekCount" resultType="int">
+        select count(*) from notice 
+        where create_time >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        and create_time &lt; CURDATE()
+    </select>
+
+</mapper> 

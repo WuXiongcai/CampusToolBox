@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CodeHostingToolMapper">
+
+    <select id="selectList" resultType="com.example.entity.CodeHostingTool">
+        select * from code_hosting_tool
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        order by create_time desc
+        <if test="pageStart != null and pageSize != null">
+            limit #{pageStart}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.CodeHostingTool">
+        select * from code_hosting_tool where id = #{id}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from code_hosting_tool
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.example.entity.CodeHostingTool" useGeneratedKeys="true" keyProperty="id">
+        insert into code_hosting_tool(
+            icon, name, description, url
+        ) values (
+            #{icon}, #{name}, #{description}, #{url}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.example.entity.CodeHostingTool">
+        update code_hosting_tool
+        <set>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="url != null">url = #{url},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from code_hosting_tool where id = #{id}
+    </delete>
+
+    <delete id="deleteBatch">
+        delete from code_hosting_tool where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAllForExport" resultType="com.example.entity.CodeHostingTool">
+        select * from code_hosting_tool order by create_time desc
+    </select>
+
+</mapper> 

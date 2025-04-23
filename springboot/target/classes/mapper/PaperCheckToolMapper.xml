@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PaperCheckToolMapper">
+
+    <select id="selectList" resultType="com.example.entity.PaperCheckTool">
+        select * from paper_check_tool
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        order by create_time desc
+        <if test="pageStart != null and pageSize != null">
+            limit #{pageStart}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.PaperCheckTool">
+        select * from paper_check_tool where id = #{id}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from paper_check_tool
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.example.entity.PaperCheckTool" useGeneratedKeys="true" keyProperty="id">
+        insert into paper_check_tool(
+            icon, name, description, url, pricing
+        ) values (
+            #{icon}, #{name}, #{description}, #{url}, #{pricing}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.example.entity.PaperCheckTool">
+        update paper_check_tool
+        <set>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="pricing != null">pricing = #{pricing},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from paper_check_tool where id = #{id}
+    </delete>
+
+    <delete id="deleteBatch">
+        delete from paper_check_tool where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAllForExport" resultType="com.example.entity.PaperCheckTool">
+        select * from paper_check_tool order by create_time desc
+    </select>
+
+</mapper> 
