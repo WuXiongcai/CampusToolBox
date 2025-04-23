@@ -14,6 +14,7 @@ CampusToolBox(校园百宝箱) 是一个基于 Vue 3 + Spring Boot 的前后端�
 </table>
 
 ### 管理后台
+点击用户前台的右上角“钥匙”图标🔑三次可以进入后台
 <table>
   <tr>
     <img src="docs/images/admin-dashboard.png" alt="管理后台首页" />
@@ -76,7 +77,7 @@ ls
 ### 前端环境要求
 - Node.js 16+
 - npm 或 yarn
-- IDE 推荐：VS Code
+- IDE 推荐：VSCode
 
 ### 后端环境要求
 - JDK 1.8+
@@ -137,11 +138,10 @@ npm run build
 
 ## 👥 感谢本项目贡献者
 
-| 姓名 | 职责 | 联系方式 |
-|------|------|----------|
-| 开发者1 | 前端开发 | example1@email.com |
-| 开发者2 | 后端开发 | example2@email.com |
-| 开发者3 | UI设计 | example3@email.com |
+| 姓名 | 仓库地址or联系方式 |
+|------|----------|
+| Deng Zhenwu | https://github.com/19807624867 |
+| Mizhuo | mixiongwudi123@email.com |
 
 ## 📄 许可证
 本项目采用 MIT 许可证 
