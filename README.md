@@ -53,8 +53,7 @@ CampusToolBox(校园百宝箱) 是一个基于 Vue 3 + Spring Boot 的前后端�
 - JWT 认证
 
 ## 🌐 在线预览
-- 用户前台：[https://www.campustoolbox.com](待部署)
-- 管理后台：[https://admin.campustoolbox.com](待部署)
+在线预览：https://www.campustoolbox.site
 
 ## 📥 项目下载
 ```bash
@@ -138,10 +137,10 @@ npm run build
 
 ## 👥 感谢本项目贡献者
 
-| 姓名 | 仓库地址or联系方式 |
+| 姓名 | 仓库地址 |
 |------|----------|
 | Deng Zhenwu | https://github.com/19807624867 |
-| Mizhuo | mixiongwudi123@email.com |
+| Mizhuo | https://github.com/wudiwudiduwidu |
 
 ## 📄 许可证
 本项目采用 MIT 许可证 
